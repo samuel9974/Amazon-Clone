@@ -134,16 +134,75 @@
 
 /* Shopping cart icon positioning */
 .cart {
-  position: relative; /* For absolute positioning of counter */
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 /* Cart item counter badge */
 .cart span {
-  position: absolute; /* Position relative to .cart */
+  position: absolute;
   font-weight: bold;
-  top: 0px; /* Align to top */
-  font-size: 20px;
-  background-color: #f1a1a1; /* Light red/pink background */
-  left: 16px; /* Offset from left */
-  color: orange; /* Orange text */
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  /* background-color: #ff9900; */
+  color: #ff9900;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hover effects for interactive elements */
+.order__container a:hover,
+.delivery:hover,
+.logo__container a:hover,
+.lower__container ul li:hover {
+  border: 1px solid white;
+  border-radius: 3px;
+}
+
+/* Lower container styling */
+.lower__container {
+  background-color: #232f3e;
+  color: white;
+}
+
+/* Lower container unordered list */
+.lower__container ul {
+  display: flex;
+  list-style: none;
+  gap: 5px;
+}
+
+/* Lower container list items */
+.lower__container ul li {
+  padding: 8px;
+}
+
+/* First child list item styling */
+.lower__container ul li:first-child {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+/* Mobile responsive design for screens 576px and smaller */
+@media screen and (max-width: 576px) {
+  .header__container {
+    display: flex;
+    flex-direction: column !important;
+    height: auto;
+  }
+
+  .lower__container ul li:not(:first-child) {
+    display: none;
+  }
+
+  .language {
+    display: none;
+  }
 }
