@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import classes from "./header.module.css";
 import SearchIcon from "@mui/icons-material/Search";
 import PlaceIcon from "@mui/icons-material/Place";
@@ -12,12 +13,12 @@ const Header = () => {
         {/* Left side: Logo and Delivery Location Section */}
         <div className={classes.logo__container}>
           {/* Amazon Logo - links to homepage */}
-          <a href="/">
+          <Link to="/">
             <img
               src="https://pngimg.com/uploads/amazon/amazon_PNG11.png"
               alt="amazon logo"
             />
-          </a>
+          </Link>
 
           {/* Delivery Location Section */}
           <div className={classes.delivery}>
@@ -25,7 +26,7 @@ const Header = () => {
               <PlaceIcon />
             </span>
             <div>
-              <p>Delivered to</p>
+              <p>Delivered to </p>
               <span>Israel</span>
             </div>
           </div>
@@ -48,35 +49,35 @@ const Header = () => {
         {/* Right side: Navigation Links and Account Section */}
         <div className={classes.order__container}>
           {/* Language selector with country flag */}
-          <a href="" className={classes.language}>
+          <Link to="/language" className={classes.language}>
             <img
-              src="https://flagcdn.com/w40/us.png"
-              alt="us flag"
+              src="https://flagcdn.com/w40/il.png"
+              alt="israel flag"
               width="30"
               height="20"
             />
             <select name="" id="">
               <option value="">EN</option>
             </select>
-          </a>
+          </Link>
 
           {/* Sign In / Account Link */}
-          <a href="">
+          <Link to="/signup">
             <p>Hello, sign in</p>
             <span>Account & Lists</span>
-          </a>
+          </Link>
 
           {/* Returns and Orders Link */}
-          <a href="">
+          <Link to="/orders">
             <p>Returns</p>
             <span>& Orders</span>
-          </a>
+          </Link>
 
           {/* Shopping Cart Icon with item counter */}
-          <a href="/cart" className={classes.cart}>
+          <Link to="/cart" className={classes.cart}>
             <ProductionQuantityLimitsIcon />
             <span>0</span>
-          </a>
+          </Link>
         </div>
       </div>
       <LowerHeader />
