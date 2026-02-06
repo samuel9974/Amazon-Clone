@@ -16,9 +16,11 @@ const Routering = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/payment" element={<Payment />} />
-        <Route path="/product" element={<ProductDetail />} />
+        {/* <Route path="/product" element={<ProductDetail />} /> */}
         <Route path="/results" element={<Results />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/category/:categoryName" element={<Results />} />
+        <Route path="/products/:productId" element={<ProductDetail />} />
       </Routes>
     </BrowserRouter>
   );

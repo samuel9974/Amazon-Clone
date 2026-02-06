@@ -1,8 +1,12 @@
-.results_container {
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.products_container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  padding: 148px 30px;
+  margin: 100px auto 180px auto;
+  gap: 30px;
+  justify-items: center;
+}
+
+.products_container section {
+  margin: 0 auto;
 }

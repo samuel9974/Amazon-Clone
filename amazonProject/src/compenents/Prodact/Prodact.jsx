@@ -21,7 +21,7 @@ const Prodact = () => {
   return (
     <div className={classes.products_container}>
       {prodacts.map((singleprodact) => (
-        <ProdactCard prodact={singleprodact} key={singleprodact.id} />
+        <ProdactCard product={singleprodact} key={singleprodact.id} />
       ))}
     </div>
   );

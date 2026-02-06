@@ -1,26 +1,25 @@
 import React from "react";
 import classes from "./prodact.module.css";
 import Rating from "@mui/material/Rating";
+import { Link } from "react-router-dom";
 
-
-
-const ProdactCard = ({ prodact }) => {
+const ProdactCard = ({ product }) => {
   
   return (
     <div className={classes.card_container}>
-      <a href="">
-        <img src={prodact.image} alt={prodact.title} />
-      </a>
+      <Link to={`/products/${product.id}`}>
+        <img src={product.image} alt={product.title} />
+      </Link>
       <div className={classes.card_info}>
-        <h3>{prodact.title}</h3>
+        <h3>{product.title}</h3>
 
         <div className={classes.rating}>
-          <Rating value={prodact.rating.rate} precision={0.1} />
-          <small>({prodact.rating.count})</small>
+          <Rating value={product.rating.rate} precision={0.1} />
+          <small>({product.rating.count})</small>
         </div>
 
         <div className={classes.card__price}>
-          <p>${prodact.price}</p>
+          <p>${product.price}</p>
         </div>
 
         <div className={classes.button}>
@@ -31,5 +30,4 @@ const ProdactCard = ({ prodact }) => {
     </div>
   );
 };
-;
 export default ProdactCard;
