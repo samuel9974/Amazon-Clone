@@ -5,10 +5,14 @@ import SearchIcon from "@mui/icons-material/Search";
 import PlaceIcon from "@mui/icons-material/Place";
 import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantityLimits";
 import LowerHeader from "./LowerHeader.jsx";
+import { useContext } from "react";
+import { DataContext } from "../DataProvider/DataProvider.jsx";
 const Header = () => {
+  const [state, dispatch] = useContext(DataContext);
+
   return (
     // Main header container - dark background bar at the top
-    <section>
+    <section className={classes.fixed__header}>
       <div className={classes.header__container}>
         {/* Left side: Logo and Delivery Location Section */}
         <div className={classes.logo__container}>
@@ -76,7 +80,7 @@ const Header = () => {
           {/* Shopping Cart Icon with item counter */}
           <Link to="/cart" className={classes.cart}>
             <ProductionQuantityLimitsIcon />
-            <span>0</span>
+            <span>{state.basket.length}</span>
           </Link>
         </div>
       </div>

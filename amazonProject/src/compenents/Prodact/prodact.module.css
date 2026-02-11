@@ -57,3 +57,33 @@
 .products_container section {
   margin: 0 auto;
 }
+.product__flexed {
+  box-shadow: none;
+  height: auto;
+  display: flex;
+  gap: 50px;
+  width: 100%;
+}
+.product__flexed h3 {
+  padding: 20px 0px;
+}
+.product__flexed .button {
+  display: flex;
+  position: static;
+  width: 150px;
+  margin-right: 40px;
+}
+.product__flexed{
+  height: 50vh;
+}
+.product__flexed img {
+  width: 300px !important;
+  height: auto;
+}
+@media (max-width: 768px) {
+  .product__flexed {
+    display: flex;
+    flex-direction: column;
+  }
+  
+}

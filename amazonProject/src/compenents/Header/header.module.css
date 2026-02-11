@@ -3,6 +3,11 @@
   margin: 0;
   padding: 0;
 }
+.fixed__header {
+  position: sticky;
+  top: 0;
+  z-index: 100; /* Ensure it stays on top of other content */
+}
 
 /* Main header container - the complete top navigation bar */
 .header__container {

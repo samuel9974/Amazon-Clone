@@ -5,19 +5,24 @@ import { productUrl } from "../../Api/endPoints.js";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import ProdactCard from "../../compenents/Prodact/ProdactCard.jsx";
+import Loader from "../../compenents/Loader/Loader.jsx";
 
 const Results = () => {
   const { categoryName } = useParams();
   const [results, setResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     axios
       .get(`${productUrl}/products/category/${categoryName.toLowerCase()}`)
       .then((res) => {
         setResults(res.data);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error("There was an error fetching the products!", error);
+        setIsLoading(false);
       });
   }, [categoryName]);
 
@@ -28,7 +33,7 @@ const Results = () => {
         <p style={{ padding: "30px" }}>Category / {categoryName}</p>
         <hr />
         <div className={classes.products_container}>
-          {results?.map((product) => (
+          {isLoading ? <Loader /> : results?.map((product) => (
             <ProdactCard key={product.id} product={product} />
           ))}
         </div>
