@@ -1,3 +1,16 @@
+/**
+ * categoryFullInfos.js - Product Categories Data
+ *
+ * Defines all available product categories with their metadata.
+ * Each category object contains:
+ * - title: Display name shown to users
+ * - name: URL-friendly identifier used in routes
+ * - imglink: URL to category banner image
+ *
+ * Used by the Category component to render category cards on the landing page.
+ * When a user clicks a category, they are navigated to /category/:name
+ */
+
 export const categoryImage = [
   {
     title: "Electronics",

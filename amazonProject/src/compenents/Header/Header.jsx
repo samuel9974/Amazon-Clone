@@ -7,7 +7,21 @@ import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantity
 import LowerHeader from "./LowerHeader.jsx";
 import { useContext } from "react";
 import { DataContext } from "../DataProvider/DataProvider.jsx";
+/**
+ * Header.jsx - Main Application Header
+ *
+ * The main navigation bar displayed at the top of the application.
+ * Includes:
+ * - Logo/branding
+ * - Delivery location information
+ * - Search functionality
+ * - User account links
+ * - Shopping cart icon with item counter
+ * - Lower header navigation menu (categories)
+ */
+
 const Header = () => {
+  // Access global state to get basket count for display
   const [state, dispatch] = useContext(DataContext);
 
   return (
