@@ -1,0 +1,140 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family:sans-serif;
+}
+:root {
+    --primary-color: #ff9900;
+    --primary-shade: #e68a00;
+}
+
+/* Amazon header — hover outline (Bootstrap has no utility for this) */
+.header-hover-item:hover {
+    outline: 1px solid #fff;
+    outline-offset: -1px;
+}
+
+/* Category grid — overlap hero carousel (Amazon-style) */
+.category-hero-overlap {
+    position: relative;
+    z-index: 2;
+    margin-top: clamp(-4rem, -10vw, -6rem);
+    padding: 0 0.75rem 2.5rem;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (min-width: 768px) {
+    .category-hero-overlap {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        padding-bottom: 3rem;
+    }
+}
+
+.category-card-hover {
+    min-height: 280px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+@media (min-width: 576px) {
+    .category-card-hover {
+        min-height: 300px;
+    }
+}
+
+@media (min-width: 992px) {
+    .category-card-hover {
+        min-height: 320px;
+    }
+}
+
+.category-card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.category-card-link:focus-visible {
+    outline: 2px solid var(--primary-color, #ff9900);
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+}
+
+.category-card-image-wrap {
+    min-height: 140px;
+}
+
+@media (min-width: 576px) {
+    .category-card-image-wrap {
+        min-height: 160px;
+    }
+}
+
+.category-card-img {
+    max-height: 180px;
+    width: 100%;
+}
+
+@media (min-width: 992px) {
+    .category-card-img {
+        max-height: 200px;
+    }
+}
+
+.shop-now {
+    display: inline-block;
+    margin-left: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: rgb(9, 132, 209);
+    text-transform: lowercase;
+}
+
+.shop-now::first-letter {
+    text-transform: uppercase;
+}
+
+/* Product grid (home + category results) */
+.products-grid-section {
+    max-width: 1450px;
+    margin: 100px auto;
+    padding: 0 1rem 100px;
+}
+
+.product-card-grid {
+    width: 250px;
+    max-width: 100%;
+    position: relative;
+}
+
+.product-grid-img {
+    height: 200px;
+    width: 100%;
+    padding: 0.5rem;
+}
+
+.product-card-grid .product-add-btn-wrap {
+    display: none;
+}
+
+.product-card-grid:hover .product-add-btn-wrap {
+    display: block;
+}
+
+/* Product detail — wide card */
+.product-card-flexed {
+    min-height: 50vh;
+    box-shadow: none !important;
+}
+
+.product-flex-img {
+    max-width: 300px;
+    width: 100%;
+}
+
+.product-detail-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+}

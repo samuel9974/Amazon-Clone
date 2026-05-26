@@ -1,6 +1,37 @@
-# Amazon-Style E-Commerce Front End
+# Amazon Clone — Full-Stack E-Commerce
 
-A **React** single-page application that recreates the look and feel of Amazon’s shopping experience. The app uses the [Fake Store API](https://fakestoreapi.com) for product data, **React Router** for navigation, and **Context API + `useReducer`** for cart state—organized into reusable layout, header, and product components.
+A **React + Vite** storefront with a **Node.js / Express** API and **MySQL** database. The goal is a production-style Amazon-like platform: your **database is the catalog source of truth** (not [Fake Store API](https://fakestoreapi.com)). The frontend still calls Fake Store temporarily until **Step 10** wires it to your API.
+
+| Layer | Path | Status |
+|-------|------|--------|
+| Frontend | `amazonProject/frontend/` | UI shell (catalog still on Fake Store until Step 10) |
+| Backend | `amazonProject/backend/` | DB ready; API steps 2+ pending |
+| Database | `amazonProject/backend/src/db/` | **Step 1 complete** — 8 tables + seed |
+
+### Step 1 — Database setup
+
+See [`amazonProject/backend/src/db/README.md`](amazonProject/backend/src/db/README.md).
+
+```powershell
+cd amazonProject/backend
+.\scripts\setup-db.ps1 -DbPassword your_mysql_password
+```
+
+Align `backend/.env` with the schema:
+
+```env
+DB_NAME=amazon_clone
+DB_USER=root
+DB_PASSWORD=your_password
+```
+
+**Demo accounts after seed:** `user@amazon.local` / `user123` · `admin@amazon.local` / `admin123`
+
+---
+
+## Front-end overview (legacy README below)
+
+A **React** single-page application that recreates the look and feel of Amazon’s shopping experience. It currently still uses the Fake Store API in code; that will be replaced when the backend catalog API (Steps 4 + 10) is implemented.
 
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
 ![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=white)
