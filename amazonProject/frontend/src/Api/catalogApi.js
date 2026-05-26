@@ -1,10 +1,4 @@
-import axios from "axios";
-import { API_BASE } from "./endPoints.js";
-
-const api = axios.create({
-  baseURL: API_BASE,
-  headers: { Accept: "application/json" },
-});
+import api from "./apiClient.js";
 
 export async function fetchAllProducts() {
   const { data } = await api.get("/products", { params: { size: 100 } });
@@ -24,8 +18,8 @@ export async function fetchProductsByCategory(slug) {
 }
 
 /**
- * GET /api/categories — maps MySQL rows to the same shape as categoryFullInfos.js
- * { title, name, imglink } so Category.jsx and CatagoryCard stay unchanged.
+ * GET /api/categories — maps API rows for Category.jsx / CatagoryCard
+ * { title, name, imglink }
  */
 export async function fetchCategories() {
   const { data } = await api.get("/categories");

@@ -1,5 +1,5 @@
 -- ============================================================
---  Seed data — 4 categories, products, reviews
+--  Seed data — 4 categories, 30 products, reviews
 --  Applied by: mysql … < seed.sql  OR  GET http://localhost:5001/install
 -- ============================================================
 
@@ -24,8 +24,9 @@ INSERT INTO categories (name, slug, image_url) VALUES
   ('Women''s Clothing', 'womens-clothing',
    'https://images-na.ssl-images-amazon.com/images/G/01/softlines/shopbop/ingress/2023/March/mp_20230219_ff_desktopsinglecategory_desktop_379x304_1._SY304_CBe163539047_.jpg');
 
--- Products: 1=Electronics, 2=Jewelry, 3=Men's, 4=Women's
+-- Products: 1=Electronics, 2=Jewelry, 3=Men's, 4=Women's (30 total)
 INSERT INTO products (category_id, title, description, price, rating, stock, image_url) VALUES
+  -- Electronics (8)
   (1, 'Echo Dot (5th Gen) Smart Speaker',
    'Voice-controlled smart speaker with Alexa. Stream music and control smart home devices.',
    49.99, 5, 120,
@@ -38,7 +39,28 @@ INSERT INTO products (category_id, title, description, price, rating, stock, ima
    'Over-ear Bluetooth headphones with 30-hour battery life.',
    199.99, 4, 40,
    'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600'),
+  (1, '10.2" Tablet — 64GB Wi-Fi',
+   'Bright display for reading, streaming, and video calls. All-day battery.',
+   329.00, 5, 35,
+   'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=600'),
+  (1, 'Mechanical Gaming Keyboard RGB',
+   'Hot-swappable switches, USB-C, compact layout with wrist rest.',
+   98.99, 5, 60,
+   'https://images.unsplash.com/photo-1511466587290-3d451bcec6d5?w=600'),
+  (1, 'Wireless Ergonomic Mouse',
+   'Silent clicks, multi-device pairing, rechargeable USB-C.',
+   39.99, 4, 110,
+   'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=600'),
+  (1, 'Portable Bluetooth Speaker',
+   '360° sound, IPX7 waterproof, 12-hour playtime.',
+   79.99, 4, 75,
+   'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=600'),
+  (1, 'USB-C Laptop Docking Station',
+   'Dual HDMI, 100W power delivery, SD card reader, 4× USB ports.',
+   129.00, 4, 28,
+   'https://images.unsplash.com/photo-1625723044792-44de9cdc58c8?w=600'),
 
+  -- Jewelry (7)
   (2, 'Sterling Silver Pendant Necklace',
    'Minimalist pendant on an 18-inch sterling silver chain.',
    89.99, 5, 45,
@@ -51,7 +73,24 @@ INSERT INTO products (category_id, title, description, price, rating, stock, ima
    'Hypoallergenic faux-pearl studs for everyday wear.',
    34.99, 5, 80,
    'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600'),
+  (2, 'Crystal Tennis Bracelet',
+   'Elegant row of cubic zirconia stones in rhodium plating.',
+   64.99, 5, 55,
+   'https://images.unsplash.com/photo-1611591437281-460bfbe01270?w=600'),
+  (2, 'Stackable Gold Rings — Set of 5',
+   'Thin bands for mixing and matching. Sizes 5–9 included.',
+   42.50, 4, 90,
+   'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600'),
+  (2, 'Leather Wrap Bracelet',
+   'Unisex braided cuff with magnetic clasp.',
+   24.99, 4, 120,
+   'https://images.unsplash.com/photo-1611652022418-fda6c103fac6?w=600'),
+  (2, 'Diamond-Cut Hoop Earrings',
+   'Sterling silver hoops with high-polish finish. 25mm diameter.',
+   54.00, 5, 40,
+   'https://images.unsplash.com/photo-1588444837495-c5d99ee84e83?w=600'),
 
+  -- Men's Clothing (8)
   (3, 'Men''s Classic Fit Cotton T-Shirt (Pack of 3)',
    'Soft breathable cotton tees in black, navy, and heather gray.',
    29.99, 4, 150,
@@ -64,7 +103,28 @@ INSERT INTO products (category_id, title, description, price, rating, stock, ima
    'Versatile jacket for spring and fall. Zip front, side pockets.',
    79.99, 5, 55,
    'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600'),
+  (3, 'Men''s Fleece Hooded Sweatshirt',
+   'Warm pullover with kangaroo pocket and drawstring hood.',
+   44.99, 5, 85,
+   'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600'),
+  (3, 'Men''s Chino Pants',
+   'Straight fit cotton twill in khaki. Wrinkle-resistant fabric.',
+   49.99, 4, 70,
+   'https://images.unsplash.com/photo-1473966961260-931a4b9fd1c6?w=600'),
+  (3, 'Men''s Running Shoes',
+   'Breathable mesh upper with responsive foam midsole.',
+   89.99, 4, 65,
+   'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600'),
+  (3, 'Men''s Wool Blend Peacoat',
+   'Double-breasted winter coat with quilted lining.',
+   149.99, 5, 25,
+   'https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=600'),
+  (3, 'Men''s Polo Shirt — 3 Pack',
+   'Pique cotton polos in navy, white, and burgundy.',
+   39.99, 4, 95,
+   'https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?w=600'),
 
+  -- Women's Clothing (7)
   (4, 'Women''s Floral Midi Dress',
    'Flowy A-line dress with short sleeves. Machine washable.',
    49.99, 5, 70,
@@ -76,11 +136,34 @@ INSERT INTO products (category_id, title, description, price, rating, stock, ima
   (4, 'Women''s Casual Sneakers',
    'Lightweight lace-up sneakers with cushioned insole.',
    59.99, 4, 100,
-   'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600');
+   'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600'),
+  (4, 'Women''s High-Waist Yoga Leggings',
+   'Four-way stretch, squat-proof fabric with hidden pocket.',
+   34.99, 5, 130,
+   'https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=600'),
+  (4, 'Women''s Cozy Knit Cardigan',
+   'Open-front sweater with ribbed cuffs. Perfect for layering.',
+   42.99, 4, 60,
+   'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=600'),
+  (4, 'Women''s Denim Jacket',
+   'Classic trucker style in medium wash. Button front closure.',
+   64.99, 5, 45,
+   'https://images.unsplash.com/photo-1551025687-93f4dffa258b?w=600'),
+  (4, 'Women''s Silk Scarf Print',
+   'Lightweight accessory with floral pattern. 35" square.',
+   28.99, 4, 88,
+   'https://images.unsplash.com/photo-1601924994987-69d23cea4b87?w=600');
 
 INSERT INTO reviews (product_id, user_id, rating, comment) VALUES
   (1, 2, 5, 'Setup took two minutes. Alexa responds quickly.'),
+  (2, 2, 4, 'Great streaming device for the bedroom TV.'),
+  (5, 2, 5, 'Keyboard feels premium for the price.'),
   (4, 2, 5, 'Beautiful necklace — exactly as pictured.'),
+  (9, 2, 5, 'Sparkles nicely — gift for my sister.'),
   (7, 2, 4, 'Great fit and comfortable fabric.'),
+  (12, 2, 5, 'Warm and soft — wearing it daily.'),
   (10, 2, 5, 'Love this dress for summer outings.'),
-  (11, 1, 4, 'Perfect size crossbody for everyday use.');
+  (11, 1, 4, 'Perfect size crossbody for everyday use.'),
+  (16, 2, 5, 'Leggings stay in place during workouts.'),
+  (20, 1, 4, 'Docking station replaced three adapters on my desk.'),
+  (25, 2, 5, 'Peacoat fits true to size and looks sharp.');

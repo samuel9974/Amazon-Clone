@@ -4,6 +4,8 @@ import morgan from "morgan";
 import { env } from "./config/env.js";
 import pool from "./db/db.config.js";
 import { errorHandler } from "./middleware/error.js";
+import { asyncHandler } from "./utils/asyncHandler.js";
+import { stripeWebhook } from "./controllers/payments.controller.js";
 import apiRoutes from "./routes/index.js";
 import installRoutes from "./routes/install.routes.js";
 
@@ -26,6 +28,14 @@ app.use(
   }),
 );
 app.use(morgan("dev"));
+
+/** Stripe webhooks need the raw body for signature verification */
+app.post(
+  "/api/payments/webhook",
+  express.raw({ type: "application/json" }),
+  asyncHandler(stripeWebhook),
+);
+
 app.use(express.json());
 
 /** Dev helper — create schema + seed (see install.controller.js) */

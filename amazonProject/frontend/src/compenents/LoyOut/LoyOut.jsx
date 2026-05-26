@@ -1,24 +1,24 @@
 /**
- * LoyOut.jsx - Layout Wrapper Component
+ * LoyOut.jsx — Shared layout (Header + Outlet + Footer)
  *
- * A reusable layout wrapper that includes the header at the top.
- * Used by all page components to maintain consistent header across the application.
- * Wraps page content as children.
- *
- * Props:
- * - children: React components/elements to render inside the layout
+ * Child routes render inside <Outlet /> (see App.jsx).
  */
 
 import React from "react";
+import { Outlet } from "react-router-dom";
 import Header from "../Header/Header.jsx";
+import Footer from "../Footer/Footer.jsx";
 import { CategoriesProvider } from "../Category/CategoriesProvider.jsx";
 
-const LoyOut = ({ children }) => {
+const LoyOut = () => {
   return (
     <CategoriesProvider>
-      <div>
+      <div className="d-flex flex-column min-vh-100">
         <Header />
-        {children}
+        <main className="flex-grow-1">
+          <Outlet />
+        </main>
+        <Footer />
       </div>
     </CategoriesProvider>
   );

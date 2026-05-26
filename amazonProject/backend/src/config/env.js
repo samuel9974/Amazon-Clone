@@ -22,6 +22,18 @@ if (nodeEnv === "production" && jwtSecret === "dev-only-change-me") {
   throw new Error("JWT_SECRET must be set to a strong value in production");
 }
 
+const stripeSecretKey = optional("STRIPE_SECRET_KEY", "");
+const stripePublishableKey = optional("STRIPE_PUBLISHABLE_KEY", "");
+const stripeWebhookSecret = optional("STRIPE_WEBHOOK_SECRET", "");
+
+function isStripeConfigured(secretKey) {
+  return (
+    Boolean(secretKey) &&
+    secretKey.startsWith("sk_") &&
+    !secretKey.includes("replace_me")
+  );
+}
+
 export const env = {
   nodeEnv,
   isProd: nodeEnv === "production",
@@ -41,6 +53,9 @@ export const env = {
   },
   bcryptRounds: Number(optional("BCRYPT_ROUNDS", "10")),
   stripe: {
-    secretKey: optional("STRIPE_SECRET_KEY", ""),
+    secretKey: stripeSecretKey,
+    publishableKey: stripePublishableKey,
+    webhookSecret: stripeWebhookSecret,
+    isConfigured: isStripeConfigured(stripeSecretKey),
   },
 };

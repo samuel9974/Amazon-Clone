@@ -6,6 +6,7 @@ import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantity
 import LowerHeader from "./LowerHeader.jsx";
 import { DataContext } from "../DataProvider/DataProvider.jsx";
 import { useCategoriesContext } from "../Category/CategoriesProvider.jsx";
+import { useAuth } from "../../context/AuthContext.jsx";
 
 /**
  * Header.jsx - Main Application Header
@@ -19,7 +20,16 @@ const AMAZON_SEARCH_BTN = "#febd69";
 const Header = () => {
   const [state] = useContext(DataContext);
   const { categories } = useCategoriesContext();
+  const { user, isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
+
+  const displayName =
+    user?.fullName?.split(" ")[0] || user?.email?.split("@")[0] || "Account";
+
+  const handleSignOut = () => {
+    logout();
+    navigate("/");
+  };
 
   const onCategoryChange = (e) => {
     const slug = e.target.value;
@@ -113,15 +123,65 @@ const Header = () => {
                   </select>
                 </Link>
 
-                <Link
-                  to="/signup"
-                  className="text-white text-decoration-none d-flex flex-column lh-sm px-2 py-1 rounded header-hover-item"
-                >
-                  <span className="text-white-50" style={{ fontSize: "0.65rem" }}>
-                    Hello, sign in
-                  </span>
-                  <span className="fw-semibold small">Account &amp; Lists</span>
-                </Link>
+                {isAuthenticated ? (
+                  <div className="dropdown">
+                    <button
+                      type="button"
+                      className="btn btn-link text-white text-decoration-none d-flex flex-column lh-sm px-2 py-1 rounded header-hover-item dropdown-toggle"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <span
+                        className="text-white-50"
+                        style={{ fontSize: "0.65rem" }}
+                      >
+                        Hello, {displayName}
+                      </span>
+                      <span className="fw-semibold small">
+                        Account &amp; Lists
+                      </span>
+                    </button>
+                    <ul className="dropdown-menu dropdown-menu-end shadow">
+                      <li>
+                        <span className="dropdown-item-text small text-muted">
+                          {user.email}
+                        </span>
+                      </li>
+                      <li>
+                        <hr className="dropdown-divider" />
+                      </li>
+                      <li>
+                        <Link className="dropdown-item" to="/orders">
+                          Your Orders
+                        </Link>
+                      </li>
+                      <li>
+                        <button
+                          type="button"
+                          className="dropdown-item"
+                          onClick={handleSignOut}
+                        >
+                          Sign out
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                ) : (
+                  <Link
+                    to="/login"
+                    className="text-white text-decoration-none d-flex flex-column lh-sm px-2 py-1 rounded header-hover-item"
+                  >
+                    <span
+                      className="text-white-50"
+                      style={{ fontSize: "0.65rem" }}
+                    >
+                      Hello, sign in
+                    </span>
+                    <span className="fw-semibold small">
+                      Account &amp; Lists
+                    </span>
+                  </Link>
+                )}
 
                 <Link
                   to="/orders"

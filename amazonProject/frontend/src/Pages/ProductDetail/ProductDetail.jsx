@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import LoyOut from "../../compenents/LoyOut/LoyOut.jsx";
 import { useParams } from "react-router-dom";
 import ProdactCard from "../../compenents/Prodact/ProdactCard.jsx";
 import Loader from "../../compenents/Loader/Loader.jsx";
@@ -24,17 +23,15 @@ const ProductDetail = () => {
   }, [productId]);
 
   return (
-    <LoyOut>
-      <div className="product-detail-wrap">
-        {isLoading ? (
-          <Loader />
-        ) : !product ? (
-          <p className="text-center text-muted py-5">Product not found.</p>
-        ) : (
-          <ProdactCard product={product} flex={true} renderDescription={true} />
-        )}
-      </div>
-    </LoyOut>
+    <div className="product-detail-wrap">
+      {isLoading ? (
+        <Loader />
+      ) : !product ? (
+        <p className="text-center text-muted py-5">Product not found.</p>
+      ) : (
+        <ProdactCard product={product} flex={true} renderDescription={true} />
+      )}
+    </div>
   );
 };
 

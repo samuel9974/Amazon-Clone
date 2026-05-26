@@ -1,17 +1,19 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext.jsx";
 import classes from "./Auth.module.css";
 
-const Signup = () => {
-  const { register } = useAuth();
+const Login = () => {
+  const { login } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
+
+  const from = location.state?.from?.pathname || "/";
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -19,14 +21,10 @@ const Signup = () => {
     setSubmitting(true);
 
     try {
-      await register({
-        email: email.trim(),
-        password,
-        fullName: fullName.trim(),
-      });
-      navigate("/", { replace: true });
+      await login({ email: email.trim(), password });
+      navigate(from, { replace: true });
     } catch (err) {
-      setError(err.message || "Registration failed");
+      setError(err.message || "Login failed");
     } finally {
       setSubmitting(false);
     }
@@ -36,7 +34,10 @@ const Signup = () => {
     <div className="container py-5">
       <div className={`card shadow-sm border-0 ${classes.authCard}`}>
         <div className="card-body p-4">
-          <h1 className="h4 mb-4">Create account</h1>
+          <h1 className="h4 mb-1">Sign in</h1>
+          <p className="text-muted small mb-4">
+            Demo: <code>user@amazon.local</code> / <code>user123</code>
+          </p>
 
           {error && (
             <div className="alert alert-danger py-2" role="alert">
@@ -45,20 +46,6 @@ const Signup = () => {
           )}
 
           <form onSubmit={onSubmit}>
-            <div className="mb-3">
-              <label htmlFor="fullName" className="form-label">
-                Your name
-              </label>
-              <input
-                id="fullName"
-                type="text"
-                className="form-control"
-                autoComplete="name"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-              />
-            </div>
-
             <div className="mb-3">
               <label htmlFor="email" className="form-label">
                 Email
@@ -82,13 +69,12 @@ const Signup = () => {
                 id="password"
                 type="password"
                 className="form-control"
-                autoComplete="new-password"
+                autoComplete="current-password"
                 required
                 minLength={6}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <div className="form-text">At least 6 characters</div>
             </div>
 
             <button
@@ -96,12 +82,13 @@ const Signup = () => {
               className={`btn w-100 ${classes.submitBtn}`}
               disabled={submitting}
             >
-              {submitting ? "Creating account…" : "Create your Amazon account"}
+              {submitting ? "Signing in…" : "Sign in"}
             </button>
           </form>
 
           <p className="small text-center mt-4 mb-0">
-            Already have an account? <Link to="/login">Sign in</Link>
+            New to Amazon Clone?{" "}
+            <Link to="/signup">Create your account</Link>
           </p>
         </div>
       </div>
@@ -109,4 +96,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Login;
