@@ -9,9 +9,9 @@ All HTTP calls go through **`apiClient.js`** → Express `http://localhost:5001/
 | `apiClient.js` | Shared axios + JWT header + error normalization |
 | `catalogApi.js` | `/products`, `/categories` |
 | `authApi.js` | `/auth/*` + `AuthContext` (Step 3 ✓) |
-| `cartApi.js` | `/cart` (UI in Step 4) |
-| `ordersApi.js` | `/orders` (UI in Step 5–7) |
-| `paymentsApi.js` | `/payments/*` (UI in Step 6) |
+| `cartApi.js` | `/cart` + `CartContext` (Step 4 ✓) |
+| `ordersApi.js` | `/orders` + Checkout page (Step 5 ✓) |
+| `paymentsApi.js` | `/payments/*` + Payment page (Step 6 ✓) |
 | `adminApi.js` | `/admin/*` (UI in Step 8) |
 | `index.js` | Barrel exports |
 

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import ProdactCard from "../../compenents/Prodact/ProdactCard.jsx";
-import Loader from "../../compenents/Loader/Loader.jsx";
-import { fetchProductById } from "../../Api/catalogApi.js";
+import ProdactCard from "../compenents/Prodact/ProdactCard.jsx";
+import Loader from "../compenents/Loader/Loader.jsx";
+import { fetchProductById } from "../Api/catalogApi.js";
 
 const ProductDetail = () => {
   const { productId } = useParams();

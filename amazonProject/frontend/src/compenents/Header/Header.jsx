@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import PlaceIcon from "@mui/icons-material/Place";
 import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantityLimits";
 import LowerHeader from "./LowerHeader.jsx";
-import { DataContext } from "../DataProvider/DataProvider.jsx";
 import { useCategoriesContext } from "../Category/CategoriesProvider.jsx";
 import { useAuth } from "../../context/AuthContext.jsx";
+import { useCart } from "../../context/CartContext.jsx";
 
 /**
  * Header.jsx - Main Application Header
@@ -18,9 +18,9 @@ const AMAZON_NAV_BG = "#131921";
 const AMAZON_SEARCH_BTN = "#febd69";
 
 const Header = () => {
-  const [state] = useContext(DataContext);
   const { categories } = useCategoriesContext();
   const { user, isAuthenticated, logout } = useAuth();
+  const { itemCount } = useCart();
   const navigate = useNavigate();
 
   const displayName =
@@ -202,7 +202,7 @@ const Header = () => {
                     className="position-absolute top-0 start-50 translate-middle-x fw-bold"
                     style={{ color: "#ff9900", fontSize: "0.875rem" }}
                   >
-                    {state.basket.length}
+                    {itemCount}
                   </span>
                 </Link>
               </div>

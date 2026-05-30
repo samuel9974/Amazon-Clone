@@ -4,12 +4,11 @@
 
 import React from "react";
 
-
 const Orders = () => {
   return (
-    <div className={classes.orders}>
-      <h1>Your Orders</h1>
-      <p>You have no orders yet.</p>
+    <div className="container py-4">
+      <h1 className="h3 mb-3">Your Orders</h1>
+      <p className="text-muted">You have no orders yet.</p>
     </div>
   );
 };

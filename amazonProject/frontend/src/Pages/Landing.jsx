@@ -3,9 +3,9 @@
  */
 
 import React from "react";
-import Coursel from "../../compenents/Carousel/CarouselEfect.jsx";
-import Prodact from "../../compenents/Prodact/Prodact.jsx";
-import Category from "../../compenents/Category/Category.jsx";
+import Coursel from "../compenents/Carousel/CarouselEfect.jsx";
+import Prodact from "../compenents/Prodact/Prodact.jsx";
+import Category from "../compenents/Category/Category.jsx";
 
 const Landing = () => {
   return (

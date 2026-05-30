@@ -1,23 +1,39 @@
 /**
  * ProdactCard.jsx - Individual Product Card Component
- *
- * Grid card on listing pages; wide layout when flex + renderDescription (product detail).
  */
 
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import Rating from "@mui/material/Rating";
-import { Link } from "react-router-dom";
-import { Types } from "../../Utility/actionType.js";
-import { DataContext } from "../DataProvider/DataProvider.jsx";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext.jsx";
+import { useCart } from "../../context/CartContext.jsx";
 
 const ProdactCard = ({ product, flex, renderDescription }) => {
-  const [, dispatch] = useContext(DataContext);
+  const { isAuthenticated } = useAuth();
+  const { addItem } = useCart();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [adding, setAdding] = useState(false);
+  const [message, setMessage] = useState("");
 
-  const addToCart = () => {
-    dispatch({
-      type: Types.ADD_TO_BASKET,
-      item: product,
-    });
+  const addToCart = async () => {
+    if (!isAuthenticated) {
+      navigate("/login", { state: { from: location } });
+      return;
+    }
+
+    setAdding(true);
+    setMessage("");
+
+    try {
+      await addItem(product.id, 1);
+      setMessage("Added to cart");
+      setTimeout(() => setMessage(""), 2000);
+    } catch (err) {
+      setMessage(err.message || "Could not add to cart");
+    } finally {
+      setAdding(false);
+    }
   };
 
   const ratingValue = product.rating?.rate ?? 0;
@@ -25,19 +41,28 @@ const ProdactCard = ({ product, flex, renderDescription }) => {
   const priceLabel = Number(product.price).toFixed(2);
 
   const addToCartBtn = (
-    <button
-      type="button"
-      className="btn btn-warning w-100 rounded-pill fw-bold shadow-sm"
-      onClick={addToCart}
-    >
-      Add to Cart
-    </button>
+    <div>
+      <button
+        type="button"
+        className="btn btn-warning rounded-pill fw-bold w-100 btn-add-to-cart border"
+        onClick={addToCart}
+        disabled={adding}
+      >
+        {adding ? "Adding…" : "Add to Cart"}
+      </button>
+      {message && (
+        <small
+          className={`d-block mt-1 text-center ${message.includes("Added") ? "text-success" : "text-danger"}`}
+        >
+          {message}
+        </small>
+      )}
+    </div>
   );
 
-  /* Product detail — horizontal layout */
   if (flex) {
     return (
-      <article className="card product-card-flexed border-0 bg-white w-100">
+      <article className="card border-0 bg-white w-100 shadow-sm">
         <div className="card-body p-3 p-md-4">
           <div className="row g-4 flex-column flex-md-row align-items-start">
             <div className="col-12 col-md-auto text-center text-md-start">
@@ -45,13 +70,14 @@ const ProdactCard = ({ product, flex, renderDescription }) => {
                 <img
                   src={product.image}
                   alt={product.title}
-                  className="img-fluid object-fit-contain product-flex-img"
+                  className="img-fluid object-fit-contain"
+                  style={{ maxHeight: 300 }}
                 />
               </Link>
             </div>
 
             <div className="col">
-              <h1 className="h4 fw-bold mb-3">{product.title}</h1>
+              <h1 className="h4 fw-bold mb-3 text-dark">{product.title}</h1>
 
               {renderDescription && (
                 <p className="text-secondary mb-3" style={{ maxWidth: "750px" }}>
@@ -61,14 +87,12 @@ const ProdactCard = ({ product, flex, renderDescription }) => {
 
               <div className="d-flex align-items-center gap-2 mb-3">
                 <Rating value={ratingValue} precision={0.1} readOnly size="small" />
-                <small className="text-muted">({ratingCount})</small>
+                <small className="text-secondary">({ratingCount})</small>
               </div>
 
               <p className="fs-4 fw-bold text-dark mb-4">${priceLabel}</p>
 
-              <div className="d-inline-block" style={{ minWidth: "150px" }}>
-                {addToCartBtn}
-              </div>
+              <div style={{ maxWidth: "220px" }}>{addToCartBtn}</div>
             </div>
           </div>
         </div>
@@ -76,33 +100,32 @@ const ProdactCard = ({ product, flex, renderDescription }) => {
     );
   }
 
-  /* Grid card — home / category results */
   return (
-    <article className="card product-card-grid shadow-sm border-0 bg-white h-100 text-dark">
+    <article className="card product-card-grid h-100 bg-white border shadow-sm">
       <Link
         to={`/products/${product.id}`}
-        className="d-block text-decoration-none p-2 pb-0"
+        className="d-block text-decoration-none px-3 pt-3"
       >
         <img
           src={product.image}
           alt={product.title}
-          className="card-img-top object-fit-contain product-grid-img mx-auto d-block"
+          className="card-img-top object-fit-contain mx-auto d-block product-grid-img border-0 bg-white"
         />
       </Link>
 
-      <div className="card-body d-flex flex-column pb-5">
-        <h2 className="card-title h6 fw-semibold mb-2 text-dark">{product.title}</h2>
+      <div className="card-body d-flex flex-column px-3 pt-2 pb-3">
+        <h2 className="card-title h6 fw-bold text-dark mb-2 lh-sm">
+          {product.title}
+        </h2>
 
         <div className="d-flex align-items-center gap-1 mb-2">
           <Rating value={ratingValue} precision={0.1} readOnly size="small" />
-          <small className="text-muted">({ratingCount})</small>
+          <small className="text-secondary">({ratingCount})</small>
         </div>
 
-        <p className="fs-5 fw-bold mb-0 mt-auto">${priceLabel}</p>
-      </div>
+        <p className="fs-5 fw-bold text-dark mb-3">${priceLabel}</p>
 
-      <div className="product-add-btn-wrap position-absolute bottom-0 start-0 end-0 p-2 bg-white bg-opacity-75">
-        {addToCartBtn}
+        <div className="mt-auto">{addToCartBtn}</div>
       </div>
     </article>
   );

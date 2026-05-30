@@ -1,18 +1,6 @@
-import React, {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { getMe, login as loginApi, logout as logoutApi, register as registerApi } from "../Api/authApi.js";
 import { getAuthToken } from "../Api/apiClient.js";
-import {
-  getMe,
-  login as loginApi,
-  logout as logoutApi,
-  register as registerApi,
-} from "../Api/authApi.js";
 
 const AuthContext = createContext(null);
 
